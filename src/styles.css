@@ -39,6 +39,12 @@ a {
   background: #1f2937;
   cursor: pointer;
 }
+
+.btn:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+}
+
 .btn.primary {
   background: #2563eb;
   border-color: #1d4ed8;
