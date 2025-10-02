@@ -12,16 +12,16 @@ export default function BlueprintsPage() {
   const { byAuthor, current, status } = useSelector((s) => s.blueprints)
   const [authorInput, setAuthorInput] = useState('')
   const [selectedAuthor, setSelectedAuthor] = useState('')
-  const items = byAuthor[selectedAuthor] || []
+  const items = byAuthor[selectedAuthor] ?? []
 
   useEffect(() => {
     dispatch(fetchAuthors())
   }, [dispatch])
 
-  const totalPoints = useMemo(
-    () => items.reduce((acc, bp) => acc + (bp.points?.length || 0), 0),
-    [items],
-  )
+  const totalPoints = useMemo(() => {
+    if (!Array.isArray(items)) return 0
+    return items.reduce((acc, bp) => acc + (bp.points?.length || 0), 0)
+  }, [items])
 
   const getBlueprints = () => {
     if (!authorInput) return
@@ -38,6 +38,10 @@ export default function BlueprintsPage() {
       <section className="grid" style={{ gap: 16 }}>
         <div className="card">
           <h2 style={{ marginTop: 0 }}>Blueprints</h2>
+          <h2 style={{ marginTop: 0 }}>
+            {import.meta.env.VITE_USE_MOCK === 'true' ? 'Usando Mock API' : 'Usando Real API'}
+          </h2>
+
           <div style={{ display: 'flex', gap: 12 }}>
             <input
               className="input"
