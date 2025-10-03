@@ -8,18 +8,15 @@ export default function App() {
   return (
     <div className="container">
       <header>
-        <h1>ECI - Laboratorio de Blueprints en React</h1>
+        <h1>Blueprints en React</h1>
         <nav>
-          <NavLink to="/" end>
-            Blueprints
-          </NavLink>
-          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/blueprints">Blueprints</NavLink>
         </nav>
       </header>
       <Routes>
-        <Route path="/" element={<BlueprintsPage />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/blueprints" element={<BlueprintsPage />} />
         <Route path="/blueprints/:author/:name" element={<BlueprintDetailPage />} />
-        <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

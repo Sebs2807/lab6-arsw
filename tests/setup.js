@@ -1,38 +1,21 @@
-import '@testing-library/jest-dom'
+import { expect, afterEach, beforeAll, afterAll, vi } from 'vitest'
+import { cleanup } from '@testing-library/react'
+import * as matchers from '@testing-library/jest-dom/matchers'
 
-// ---- Canvas mock para jsdom ----
-if (!HTMLCanvasElement.prototype.getContext) {
-  HTMLCanvasElement.prototype.getContext = () => {
-    const noop = () => {}
-    return {
-      canvas: {},
-      fillRect: noop,
-      clearRect: noop,
-      beginPath: noop,
-      moveTo: noop,
-      lineTo: noop,
-      stroke: noop,
-      arc: noop,
-      fill: noop,
-      strokeRect: noop,
-      closePath: noop,
-      save: noop,
-      restore: noop,
-      setTransform: noop,
-      translate: noop,
-      scale: noop,
-      rotate: noop,
-      transform: noop,
-      drawImage: noop,
-      fillText: noop,
-      measureText: () => ({ width: 0 }),
-      putImageData: noop,
-      createLinearGradient: () => ({ addColorStop: noop }),
-      createPattern: () => ({}),
-      createRadialGradient: () => ({ addColorStop: noop }),
-      getImageData: () => ({}),
-      getLineDash: () => [],
-      setLineDash: noop,
-    }
-  }
-}
+expect.extend(matchers)
+
+afterEach(() => {
+  cleanup()
+})
+
+beforeAll(() => {
+  global.IntersectionObserver = vi.fn(() => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
+  }))
+})
+
+afterAll(() => {
+  vi.clearAllMocks()
+})
