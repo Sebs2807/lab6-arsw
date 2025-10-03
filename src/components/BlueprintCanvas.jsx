@@ -16,10 +16,10 @@ export default function BlueprintCanvas({ points = [], width = 520, height = 360
 
     const zoom = 10
 
-    const minX = Math.min(...points.map(p => p.x))
-    const maxX = Math.max(...points.map(p => p.x))
-    const minY = Math.min(...points.map(p => p.y))
-    const maxY = Math.max(...points.map(p => p.y))
+    const minX = Math.min(...points.map((p) => p.x))
+    const maxX = Math.max(...points.map((p) => p.x))
+    const minY = Math.min(...points.map((p) => p.y))
+    const maxY = Math.max(...points.map((p) => p.y))
 
     const bpWidth = (maxX - minX) * zoom
     const bpHeight = (maxY - minY) * zoom
